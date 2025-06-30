@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block titulo %}Detalhes do Produto{% endblock %}
+
+{% block cabecalho %}Detalhes do Produto:{% endblock %}
+
+{% block conteudo %}
+    <h2>{{ produto.nome|capfirst }}</h2>
+    <p><strong>Preço:</strong> R$ {{ produto.preco|floatformat:"2g" }}</p>
+    <p><strong>Promoção:</strong> {{ produto.promocao|default:"indisponível" }}</p>
+    {% if produto.promocao %}
+        <p><strong>Desconto:</strong> 10%</p>
+    {% endif %}
+    <p><strong>Resumo:</strong> {{ produto.descricao|truncatewords:5 }}</p>
+    <p><strong>Descrição:</strong> {{ produto.descricao|truncatechars:60 }}</p>
+    <form method="post" action="{% url 'produtos:produto' 1  %}">
+        {% csrf_token %}
+        <input type="number" name="qtd" id="qtd">
+        <button type="submit">Simular Compra</button>
+    </form>
+    
+    <a href="{% url 'produtos:principal' %}">Voltar para a lista</a>
+{% endblock %}

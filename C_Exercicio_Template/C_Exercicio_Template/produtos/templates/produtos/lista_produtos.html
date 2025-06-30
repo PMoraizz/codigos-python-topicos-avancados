@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block titulo %}Lista de Produtos{% endblock %}
+
+{% block cabecalho %}Confira todos os produtos:{% endblock %}
+
+{% block conteudo %}
+    <h2>Temos {{ quantidade }} produto{{ quantidade|pluralize:"s" }} disponíve{{ quantidade|pluralize:"l,is" }}</h2>
+
+    <ul>
+        {% for produto in produtos %}
+            <li>
+                <strong>{{ produto.nome|capfirst }}</strong><br>
+                Preço: R$ {{ produto.preco|floatformat:'2g' }}<br>
+                <a href="{% url 'produtos:produto' produto.id %}">Ver detalhes</a>
+            </li>
+        {% empty %}
+            <p>Não há produtos disponíveis.</p>
+        {% endfor %}
+    </ul>
+{% endblock %}

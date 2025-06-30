@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block titulo %}{% endblock %}</title>
+</head>
+<body>
+    <header>
+        <h1>{% block cabecalho %}{% endblock %}</h1>
+        <p>Data atual: {% now "d/m/Y" %} | Hora: {% now "H:i" %}</p>
+    </header>
+    <hr>
+    {% block conteudo %}{% endblock %}
+</body>
+</html>
